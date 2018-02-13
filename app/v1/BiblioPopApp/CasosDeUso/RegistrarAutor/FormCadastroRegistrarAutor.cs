@@ -83,11 +83,11 @@ namespace BiblioPopApp.CasosDeUso.RegistrarAutor
             novoAutor.Sobrenome = txtSobrenome.Text;
             novoAutor.Email = txtEmail.Text;
 
-            var retorno = registrarAutor.Realizar(novoAutor);
+            var retornoDeRealizarNovoAutor = registrarAutor.Realizar(novoAutor);
 
-            BiblioPopAppUtil.ProcessarMensagensRetornoBase(retorno.Mensagem, retorno.Problemas, panelMensagem, lblMensagem, listBoxProblemas);
+            BiblioPopAppUtil.ProcessarMensagensRetornoBase(retornoDeRealizarNovoAutor.Mensagem, retornoDeRealizarNovoAutor.Problemas, panelMensagem, lblMensagem, listBoxProblemas);
 
-            if (retorno.Valor > 0)
+            if (retornoDeRealizarNovoAutor.AutorId > 0)
             {
                 this.Close();
             }

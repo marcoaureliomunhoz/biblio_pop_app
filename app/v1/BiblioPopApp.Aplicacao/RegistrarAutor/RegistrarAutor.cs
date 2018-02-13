@@ -17,20 +17,20 @@ namespace BiblioPopApp.Aplicacao.RegistrarAutor
             repAutor = repositorioAutor;
         }
 
-        public RetornoBase<int> Realizar(NovoAutor novoAutor)
+        public ProtocoloDeRetorno.AoRealizarNovoAutor Realizar(NovoAutor novoAutor)
         {
-            var retorno = new RetornoBase<int>();
+            var retorno = new ProtocoloDeRetorno.AoRealizarNovoAutor();
 
             var autor = new Autor(0, new TNomePessoa(novoAutor.Nome, novoAutor.Sobrenome), new TEmail(novoAutor.Email));
 
             if (autor.EstaEmEstadoIntegro())
             {
-                var aoInserir = repAutor.Inserir(autor);
-                retorno.Valor = aoInserir.Valor;
-                if (aoInserir.Problemas.Count>0)
+                var retornoAoInserirEmRepositorioAutor = repAutor.Inserir(autor);
+                retorno.AutorId = retornoAoInserirEmRepositorioAutor.AutorId;
+                if (retornoAoInserirEmRepositorioAutor.Problemas.Count>0)
                 {
                     retorno.Mensagem = "Não foi possível registrar o novo autor.";
-                    retorno.Problemas.AddRange(aoInserir.Problemas);
+                    retorno.Problemas.AddRange(retornoAoInserirEmRepositorioAutor.Problemas);
                 }
             }
             else
@@ -42,20 +42,20 @@ namespace BiblioPopApp.Aplicacao.RegistrarAutor
             return retorno;
         }
 
-        public RetornoBase<bool> Realizar(AjusteAutor ajusteAutor)
+        public ProtocoloDeRetorno.AoRealizarAjusteAutor Realizar(AjusteAutor ajusteAutor)
         {
-            var retorno = new RetornoBase<bool>();
+            var retorno = new ProtocoloDeRetorno.AoRealizarAjusteAutor();
 
             var autor = new Autor(ajusteAutor.AutorId, new TNomePessoa(ajusteAutor.Nome, ajusteAutor.Sobrenome), new TEmail(ajusteAutor.Email));
 
             if (autor.EstaEmEstadoIntegro())
             {
-                var aoAlterar = repAutor.Alterar(autor);
-                retorno.Valor = aoAlterar.Valor;
-                if (aoAlterar.Problemas.Count > 0)
+                var retornoAoAlterarEmRepositorioAutor = repAutor.Alterar(autor);
+                retorno.AlterouComSucesso = retornoAoAlterarEmRepositorioAutor.AlterouComSucesso;
+                if (retornoAoAlterarEmRepositorioAutor.Problemas.Count > 0)
                 {
                     retorno.Mensagem = "Não foi possível alterar o autor.";
-                    retorno.Problemas.AddRange(aoAlterar.Problemas);
+                    retorno.Problemas.AddRange(retornoAoAlterarEmRepositorioAutor.Problemas);
                 }
             }
             else
@@ -67,23 +67,23 @@ namespace BiblioPopApp.Aplicacao.RegistrarAutor
             return retorno;
         }
 
-        public RetornoBase<List<TAutor>> Realizar(ListaAutores listaAutores)
+        public ProtocoloDeRetorno.AoRealizarListaAutores Realizar(ListaAutores listaAutores)
         {
-            var retorno = new RetornoBase<List<TAutor>>();
+            var retorno = new ProtocoloDeRetorno.AoRealizarListaAutores();
 
-            var aoListar = repAutor.Listar();
+            var retornoAoListarDeRepositorioAutor = repAutor.Listar();
 
-            if (aoListar.Problemas.Count > 0)
+            if (retornoAoListarDeRepositorioAutor.Problemas.Count > 0)
             {
                 retorno.Mensagem = "Não foi possível listar os autores.";
-                retorno.Problemas.AddRange(aoListar.Problemas);
+                retorno.Problemas.AddRange(retornoAoListarDeRepositorioAutor.Problemas);
             }
             else
             {
-                retorno.Valor = new List<TAutor>();
-                foreach (var item in aoListar.Valor)
+                retorno.Autores = new List<TAutor>();
+                foreach (var item in retornoAoListarDeRepositorioAutor.Autores)
                 {
-                    retorno.Valor.Add(new TAutor
+                    retorno.Autores.Add(new TAutor
                     {
                         AutorId = item.AutorId,
                         Nome = item.Nome.Nome,

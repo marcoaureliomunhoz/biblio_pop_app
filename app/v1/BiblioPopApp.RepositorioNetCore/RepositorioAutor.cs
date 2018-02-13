@@ -2,6 +2,7 @@
 using BiblioPopApp.Dominio.Descritores;
 using BiblioPopApp.Dominio.Entidades;
 using BiblioPopApp.Dominio.Repositorios;
+using BiblioPopApp.Dominio.Repositorios.ProtocoloDeRetorno;
 using BiblioPopApp.RepositorioNetCore.EF.Contextos;
 using BiblioPopApp.RepositorioNetCore.Tabelas;
 using System;
@@ -10,7 +11,7 @@ using System.Linq;
 
 namespace BiblioPopApp.RepositorioNetCore
 {
-    public class RepositorioAutor : IRepositorioAutor
+    public class RepositorioAutor 
     {
         private ContextoGeral db;
 
@@ -49,9 +50,9 @@ namespace BiblioPopApp.RepositorioNetCore
             return retorno;
         }
 
-        public RetornoBase<int> Inserir(Autor autor)
+        public AoInserirEmRepositorioAutor Inserir(Autor autor)
         {
-            var retorno = new RetornoBase<int>();
+            var retorno = new AoInserirEmRepositorioAutor();
 
             try
             {
@@ -62,7 +63,7 @@ namespace BiblioPopApp.RepositorioNetCore
                 tabAutor.Email = autor.Email.Endereco;
                 db.Autores.Add(tabAutor);
                 db.SaveChanges();
-                retorno.Valor = autor.AutorId;
+                retorno.AutorId = autor.AutorId;
             }
             catch (Exception ex)
             {
@@ -73,9 +74,9 @@ namespace BiblioPopApp.RepositorioNetCore
             return retorno;
         }
 
-        public RetornoBase<ICollection<Autor>> Listar()
+        public AoListarDeRepositorioAutor Listar()
         {
-            var retorno = new RetornoBase<ICollection<Autor>>();
+            var retorno = new AoListarDeRepositorioAutor();
 
             try
             {
@@ -86,7 +87,7 @@ namespace BiblioPopApp.RepositorioNetCore
                     autores.Add(TabAutorParaAutor(tabAutor));
                 }
 
-                retorno.Valor = autores;
+                retorno.Autores = autores;
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 using BiblioPopApp.Dominio.Descritores;
 using BiblioPopApp.Dominio.Entidades;
 using BiblioPopApp.Dominio.Repositorios;
+using BiblioPopApp.Dominio.Repositorios.ProtocoloDeRetorno;
 using BiblioPopApp.RepositorioNetFull.EF.Contextos;
 using BiblioPopApp.RepositorioNetFull.Tabelas;
 using System;
@@ -28,9 +29,9 @@ namespace BiblioPopApp.RepositorioNetFull
             );
         }
 
-        public RetornoBase<bool> Alterar(Autor autor)
+        public AoAlterarEmRepositorioAutor Alterar(Autor autor)
         {
-            var retorno = new RetornoBase<bool>();
+            var retorno = new AoAlterarEmRepositorioAutor();
 
             try
             {
@@ -38,7 +39,7 @@ namespace BiblioPopApp.RepositorioNetFull
                 tabAutor.Nome = autor.Nome.Nome;
                 tabAutor.Sobrenome = autor.Nome.Sobrenome;
                 tabAutor.Email = autor.Email.Endereco;
-                retorno.Valor = db.SaveChanges() > 0;
+                retorno.AlterouComSucesso = db.SaveChanges() > 0;
             }
             catch (Exception ex)
             {
@@ -49,9 +50,9 @@ namespace BiblioPopApp.RepositorioNetFull
             return retorno;
         }
 
-        public RetornoBase<int> Inserir(Autor autor)
+        public AoInserirEmRepositorioAutor Inserir(Autor autor)
         {
-            var retorno = new RetornoBase<int>();
+            var retorno = new AoInserirEmRepositorioAutor();
 
             try
             {
@@ -62,7 +63,7 @@ namespace BiblioPopApp.RepositorioNetFull
                 tabAutor.Email = autor.Email.Endereco;
                 db.Autores.Add(tabAutor);
                 db.SaveChanges();
-                retorno.Valor = tabAutor.AutorId;
+                retorno.AutorId = tabAutor.AutorId;
             }
             catch (Exception ex)
             {
@@ -73,9 +74,9 @@ namespace BiblioPopApp.RepositorioNetFull
             return retorno;
         }
 
-        public RetornoBase<ICollection<Autor>> Listar()
+        public AoListarDeRepositorioAutor Listar()
         {
-            var retorno = new RetornoBase<ICollection<Autor>>();
+            var retorno = new AoListarDeRepositorioAutor();
 
             try
             {
@@ -86,7 +87,7 @@ namespace BiblioPopApp.RepositorioNetFull
                     autores.Add(RepositorioAutor.TabAutorParaAutor(tabAutor));
                 }
 
-                retorno.Valor = autores;
+                retorno.Autores = autores;
             }
             catch (Exception ex)
             {
@@ -97,16 +98,16 @@ namespace BiblioPopApp.RepositorioNetFull
             return retorno;
         }
 
-        public RetornoBase<Autor> Localizar(int autorId)
+        public AoLocalizarEmRepositorioAutor Localizar(int autorId)
         {
-            var retorno = new RetornoBase<Autor>();
+            var retorno = new AoLocalizarEmRepositorioAutor();
 
             try
             {
                 var tbAutor = db.Autores.FirstOrDefault(x => x.AutorId == autorId);
                 if (tbAutor != null)
                 {
-                    retorno.Valor = RepositorioAutor.TabAutorParaAutor(tbAutor);
+                    retorno.Autor = RepositorioAutor.TabAutorParaAutor(tbAutor);
                 }
                 else
                 {

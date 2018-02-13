@@ -44,17 +44,17 @@ namespace BiblioPopApp.CasosDeUso.RegistrarAutor
         {
             var registrarAutor = ControleDependenciaNetFull.Resolve.InstanciaDe<Aplicacao.RegistrarAutor.RegistrarAutor>();
 
-            var retorno = registrarAutor.Realizar(new ListaAutores());
+            var retornoDeRealizarListaAutores = registrarAutor.Realizar(new ListaAutores());
 
-            BiblioPopAppUtil.ProcessarMensagensRetornoBase(retorno.Mensagem, retorno.Problemas, null, null, null);
+            BiblioPopAppUtil.ProcessarMensagensRetornoBase(retornoDeRealizarListaAutores.Mensagem, retornoDeRealizarListaAutores.Problemas, null, null, null);
 
-            gridAutores.DataSource = retorno.Valor;
+            gridAutores.DataSource = retornoDeRealizarListaAutores.Autores;
 
             statusBar.Text = "Nenhum autor encontrado";
 
-            if (retorno.Valor != null)
+            if (retornoDeRealizarListaAutores.Autores != null)
             {
-                var aux = retorno.Valor.Count > 1 ? retorno.Valor.Count.ToString() + " autores encontrados" : "Um autor encontrado";
+                var aux = retornoDeRealizarListaAutores.Autores.Count > 1 ? retornoDeRealizarListaAutores.Autores.Count.ToString() + " autores encontrados" : "Um autor encontrado";
                 statusBar.Text = aux;
             }
         }

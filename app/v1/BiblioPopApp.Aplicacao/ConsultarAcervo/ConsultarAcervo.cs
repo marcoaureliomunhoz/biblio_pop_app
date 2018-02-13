@@ -94,23 +94,23 @@ namespace BiblioPopApp.Aplicacao.ConsultarAcervo
             return retorno;
         }
 
-        public RetornoBase<List<TAutor>> Realizar(ListaAutores listaAutores)
+        public ProtocolosDeRetorno.RetornoDeRealizarListaAutoresEmConsultarAcervo Realizar(ListaAutores listaAutores)
         {
-            var retorno = new RetornoBase<List<TAutor>>();
+            var retorno = new ProtocolosDeRetorno.RetornoDeRealizarListaAutoresEmConsultarAcervo();
 
-            var aoListar = repAutor.Listar();
+            var retornoDeListarDeRepositorioAutor = repAutor.Listar();
 
-            if (aoListar.Problemas.Count > 0)
+            if (retornoDeListarDeRepositorioAutor.Problemas.Count > 0)
             {
                 retorno.Mensagem = "Não foi possível listar os autores.";
-                retorno.Problemas.AddRange(aoListar.Problemas);
+                retorno.Problemas.AddRange(retornoDeListarDeRepositorioAutor.Problemas);
             }
             else
             {
-                retorno.Valor = new List<TAutor>();
-                foreach (var item in aoListar.Valor)
+                retorno.Autores = new List<TAutor>();
+                foreach (var item in retornoDeListarDeRepositorioAutor.Autores)
                 {
-                    retorno.Valor.Add(new TAutor
+                    retorno.Autores.Add(new TAutor
                     {
                         AutorId = item.AutorId,
                         Nome = item.Nome.Nome,

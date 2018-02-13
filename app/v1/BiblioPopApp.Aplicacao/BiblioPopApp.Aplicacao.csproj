@@ -9,4 +9,8 @@
     <ProjectReference Include="..\BiblioPopApp.Dominio\BiblioPopApp.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RegistrarEditora\Retornos\" />
+  </ItemGroup>
+
 </Project>

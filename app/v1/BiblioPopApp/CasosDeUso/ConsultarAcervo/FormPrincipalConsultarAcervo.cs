@@ -85,14 +85,14 @@ namespace BiblioPopApp.CasosDeUso.ConsultarAcervo
         private void CarregarAutores()
         {
             var consultarAcervo = ControleDependenciaNetFull.Resolve.InstanciaDe<Aplicacao.ConsultarAcervo.ConsultarAcervo>();
-            var retorno = consultarAcervo.Realizar(new ListaAutores());
+            var retornoDeRealizarListaAutores = consultarAcervo.Realizar(new ListaAutores());
             var listaAutores = new List<TAutor>();
             listaAutores.Add(new TAutor()
             {
                 AutorId = 0,
                 Nome = "Todos"
             });
-            listaAutores.AddRange(retorno.Valor);
+            listaAutores.AddRange(retornoDeRealizarListaAutores.Autores);
             cmbAutor.DataSource = null;
             cmbAutor.DataSource = listaAutores;
         }

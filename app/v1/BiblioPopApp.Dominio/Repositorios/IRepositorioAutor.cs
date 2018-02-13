@@ -6,9 +6,9 @@ namespace BiblioPopApp.Dominio.Repositorios
 {
     public interface IRepositorioAutor
     {
-        RetornoBase<int> Inserir(Autor autor);
-        RetornoBase<bool> Alterar(Autor autor);
-        RetornoBase<ICollection<Autor>> Listar();
-        RetornoBase<Autor> Localizar(int autorId);
+        ProtocoloDeRetorno.AoInserirEmRepositorioAutor Inserir(Autor autor);
+        ProtocoloDeRetorno.AoAlterarEmRepositorioAutor Alterar(Autor autor);
+        ProtocoloDeRetorno.AoListarDeRepositorioAutor Listar();
+        ProtocoloDeRetorno.AoLocalizarEmRepositorioAutor Localizar(int autorId);
     }
 }

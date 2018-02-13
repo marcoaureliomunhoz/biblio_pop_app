@@ -20,7 +20,7 @@ namespace BiblioPopApp.ControleDependenciaNetCore
 
                 _container = new UnityContainer();
                 _container.RegisterInstance<ContextoGeral>(contextoGeral);
-                _container.RegisterType<IRepositorioAutor, RepositorioAutor>();
+                //_container.RegisterType<IRepositorioAutor, RepositorioAutor>();
                 _container.RegisterType<Aplicacao.RegistrarAutor.RegistrarAutor>();
             }
 
