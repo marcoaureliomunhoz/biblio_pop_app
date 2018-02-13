@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Unity" Version="5.5.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BiblioPopApp.Aplicacao\BiblioPopApp.Aplicacao.csproj" />
+    <ProjectReference Include="..\BiblioPopApp.Dominio\BiblioPopApp.Dominio.csproj" />
+    <ProjectReference Include="..\BiblioPopApp.RepositorioNetCore\BiblioPopApp.RepositorioNetCore.csproj" />
+  </ItemGroup>
+
+</Project>
