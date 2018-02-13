@@ -43,3 +43,13 @@ Trata-se de um sistema simples que auxilia o assistente em suas tarefas.
 - **Classes da Aplicação** 
 
 <img src="img/classes_da_aplicacao_v1.jpg">
+
+>### **Versão 1b**
+
+- **Diagrama de Classes do Domínio** 
+
+<img src="img/diagrama_de_classes_v1b.jpg">
+
+- **Classes da Aplicação** 
+
+<img src="img/classes_da_aplicacao_v1b.jpg">
