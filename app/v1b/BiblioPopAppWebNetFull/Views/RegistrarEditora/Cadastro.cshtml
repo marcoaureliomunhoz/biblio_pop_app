@@ -1,0 +1,82 @@
+﻿@model BiblioPopApp.Aplicacao._DTO.EditoraDTO
+
+@{
+    ViewBag.Title = "Registrar Editora";
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @if (string.IsNullOrEmpty(ViewBag.Origem))
+            {
+                @Html.ActionLink("Registrar Editora", "Index", "RegistrarEditora", new { area = "" }, new { @class = "navbar-brand" })
+            }
+            else
+            {
+                @Html.ActionLink("Registrar Editora", "Index", "RegistrarEditora", new { origem = ViewBag.Origem }, new { @class = "navbar-brand" })
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                @if (string.IsNullOrEmpty(ViewBag.Origem))
+                {
+                    <li>@Html.ActionLink("Voltar", "Index", "RegistrarEditora")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Voltar", "Index", "RegistrarEditora", new { origem = ViewBag.Origem }, null)</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert alert-warning" role="alert">@ViewBag.Mensagem</div>
+    }
+
+    @if (ViewBag.Problemas != null)
+    {
+        foreach (var problema in ViewBag.Problemas)
+        {
+            <div class="alert alert-danger" role="alert">@problema</div>
+        }
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="EditoraId" value="@Model.EditoraId" />
+        <input type="hidden" name="origem" value="@ViewBag.Origem" />
+
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="txtNome">Nome</label>
+                            <input type="text" class="form-control" name="Nome" id="txtNome" placeholder="" value="@Model.Nome" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="txtSite">Site</label>
+                            <input type="text" class="form-control" name="Site" id="txtSite" placeholder="" value="@Model.Site">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    }
+</div>

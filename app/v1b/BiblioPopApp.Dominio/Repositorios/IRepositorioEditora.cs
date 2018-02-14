@@ -9,6 +9,6 @@ namespace BiblioPopApp.Dominio.Repositorios
         RetornoBase<int> Inserir(Editora autor);
         RetornoBase<bool> Alterar(Editora autor);
         RetornoBase<ICollection<Editora>> Listar();
-        RetornoBase<Editora> Localizar(int autorId);
+        RetornoBase<Editora> Localizar(int editoraId);
     }
 }

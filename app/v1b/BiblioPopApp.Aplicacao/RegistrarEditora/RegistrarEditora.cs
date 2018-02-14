@@ -89,5 +89,24 @@ namespace BiblioPopApp.Aplicacao.RegistrarEditora
 
             return retorno;
         }
+
+        public RetornoBase<EditoraDTO> Realizar(Operacao.LocalizaEditora localizaEditora)
+        {
+            var retorno = new RetornoBase<EditoraDTO>();
+
+            var aoLocalizar = repEditora.Localizar(localizaEditora.EditoraId);
+
+            if (aoLocalizar.Problemas.Count > 0)
+            {
+                retorno.Mensagem = "Não foi possível localizar a editora.";
+                retorno.Problemas.AddRange(aoLocalizar.Problemas);
+            }
+            else
+            {
+                retorno.Valor = EditoraDTO.Fabricar(aoLocalizar.Valor);
+            }
+
+            return retorno;
+        }
     }
 }

@@ -86,5 +86,24 @@ namespace BiblioPopApp.Aplicacao.RegistrarAutor
 
             return retorno;
         }
+
+        public Retorno.AoRealizarLocalizaAutor Realizar(Operacao.LocalizaAutor localizaAutor)
+        {
+            var retorno = new Retorno.AoRealizarLocalizaAutor();
+
+            var retornoAoLocalizarEmRepositorioAutor = repAutor.Localizar(localizaAutor.AutorId);
+
+            if (retornoAoLocalizarEmRepositorioAutor.Problemas.Count > 0)
+            {
+                retorno.Mensagem = "Não foi possível localizar o autor.";
+                retorno.Problemas.AddRange(retornoAoLocalizarEmRepositorioAutor.Problemas);
+            }
+            else
+            {
+                retorno.Autor = AutorDTO.Fabricar(retornoAoLocalizarEmRepositorioAutor.Autor);
+            }
+
+            return retorno;
+        }
     }
 }

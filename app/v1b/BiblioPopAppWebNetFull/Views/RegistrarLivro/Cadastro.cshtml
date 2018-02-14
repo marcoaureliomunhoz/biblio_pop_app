@@ -1,0 +1,213 @@
+﻿@model BiblioPopApp.Aplicacao._DTO.LivroDTO
+
+@{
+    ViewBag.Title = "Registrar Livro";
+
+    string origem = string.IsNullOrEmpty(ViewBag.Origem) ? "Home" : ViewBag.Origem;
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Registrar Livro", "Index", origem, new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><button id="btnRegistrarEditora" type="button" class="btn btn-default navbar-btn" style="margin-right:5px">Registrar Editora</button></li>
+                <li><button id="btnRegistrarAutor" type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target=".modalAutor">Registrar Autor</button></li>
+                <li>@Html.ActionLink("Voltar", "Index", origem)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert alert-warning" role="alert">@ViewBag.Mensagem</div>
+    }
+
+    @if (ViewBag.Problemas != null)
+    {
+        foreach (var problema in ViewBag.Problemas)
+        {
+            <div class="alert alert-danger" role="alert">@problema</div>
+        }
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="LivroId" value="@Model.LivroId" />
+        <input type="hidden" name="origem" value="@origem" />
+
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <label for="txtTitulo">Título</label>
+                            <input type="text" class="form-control" name="Titulo" id="txtTitulo" placeholder="" value="@Model.Titulo" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="txtEstante">Estante</label>
+                            <input type="text" class="form-control" name="Estante" id="txtEstante" placeholder="" value="@Model.Estante">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <label for="cmbEditora">Editora</label>
+                            <select class="form-control" name="EditoraId" id="cmbEditora">
+                                @foreach (var editora in ViewBag.ListaEditoras as List<BiblioPopApp.Aplicacao._DTO.EditoraDTO>)
+                                {
+                                    <option value="@editora.EditoraId" @(Model.EditoraId == editora.EditoraId ? "selected" : "")>@editora.Nome</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="txtAnoPublicacao">Ano Publicação</label>
+                            <input type="text" class="form-control" name="AnoPublicacao" id="txtAnoPublicacao" placeholder="" value="@Model.AnoPublicacao">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        @{ var autoria = ""; }
+                        <label for="txtAutoria">Autores</label>
+                        <textarea class="form-control" rows="5" id="txtAutoria" readonly>
+                        @foreach (var autor in Model.Autores)
+                        {
+                            autoria += (autoria.Length>0?",":"") + autor.AutorId.ToString();
+                            @(autor.Nome+" "+autor.Sobrenome+"\n")
+                        }
+                        </textarea>
+                        <input type="hidden" name="Autoria" id="hidAutoria" value="@autoria" />
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:5px">
+                    <div class="col-lg-11">
+                        <div class="form-group">
+                            <select class="form-control" id="cmbAutoresDisponiveis">
+                                @foreach (var autor in ViewBag.ListaAutoresDisponiveis as List<BiblioPopApp.Aplicacao._DTO.AutorDTO>)
+                                {
+                                    <option value="@autor.AutorId">@autor.Nome @autor.Sobrenome</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" style="width:100%" id="btnIncluirAutor" @(ViewBag.ListaAutoresDisponiveis == null || ViewBag.ListaAutoresDisponiveis.Count <= 0 ? "desabled" : "")>+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="modal fade modalAutor" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:870px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                &nbsp;
+            </div>
+            <div class="modal-body">
+                <iframe src="/RegistrarAutor?origem=ConsultarAcervo" width="800" height="600" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $("#btnIncluirAutor").click(function () {
+            var cmbAutoresDisponiveis = $("#cmbAutoresDisponiveis");
+            if (cmbAutoresDisponiveis.length > 0) {
+                var autorId = cmbAutoresDisponiveis.val();
+                var option = cmbAutoresDisponiveis.find("[value=" + autorId + "]");
+                var autorNome = option.text();
+                var hidAutoria = $("#hidAutoria");
+                var txtAutoria = $("#txtAutoria");
+                if (hidAutoria.length > 0 && txtAutoria.length > 0) {
+                    var autoriaId = hidAutoria.val();
+                    var novaAutoriaId = autoriaId.length > 0 ? autoriaId + "," + autorId : autorId;
+                    hidAutoria.val(novaAutoriaId);
+
+                    var autoriaNome = txtAutoria.val().trim();
+                    var novaAutoriaNome = autoriaNome.length > 0 ? autoriaNome + "\n" + autorNome : autorNome;
+                    txtAutoria.val(novaAutoriaNome);
+
+                    option.remove();
+
+                    if (cmbAutoresDisponiveis.find("option").length <= 0) {
+                        $(this).attr("disabled", "true");
+                    }
+                }
+            }
+        });
+
+        $("#btnRegistrarEditora").click(function () {
+            var leftWindow = (screen.width / 2) - (400);
+            var featuresWindow = "width=800, height=600, top=100, left=" + leftWindow;
+            var windowRegistrarEditora = null;
+            if (window.openDialog) {
+                windowRegistrarEditora = window.openDialog("/RegistrarEditora/Index?origem=ConsultarAcerto", "_blank", featuresWindow);
+            } else {
+                windowRegistrarEditora = window.open("/RegistrarEditora/Index?origem=ConsultarAcerto", "_blank", featuresWindow);
+            }
+            var timer = setInterval(function () {
+                if (windowRegistrarEditora.closed) {
+                    clearInterval(timer);
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        cache: false,
+                        url: "/RegistrarLivro/ListaEditoras",
+                        success: function (editoras) {
+                            if (editoras.length > 0) {
+                                var cmbEditora = $("#cmbEditora");
+                                if (cmbEditora.length > 0) {
+                                    var editoraId = cmbEditora.val();
+                                    cmbEditora.contents().remove();
+                                    var options = "";
+                                    for (var i = 0; i < editoras.length; i++) {
+                                        var editora = editoras[i];
+                                        options += "<option value='" + editora.EditoraId + "' " + (editoraId == editora.EditoraId ? "selected" : "") + ">" + editora.Nome + "</option>";
+                                    }
+                                    cmbEditora.append(options);
+                                }
+                            }
+                        }
+                    });
+                }
+            }, 1000);
+        });
+
+        $(".modalAutor").on("hidden.bs.modal", function () {
+            //atualizar lista de autores disponíveis
+            //atualizar lista de autores do livro
+        });
+
+    </script>
+}
