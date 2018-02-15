@@ -1,0 +1,76 @@
+﻿@model BiblioPopApp.Aplicacao._DTO.AutorDTO
+
+@{
+    ViewBag.Title = "Registrar Autor";
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Registrar Autor", "Index", "RegistrarAutor", new { origem = ViewBag.Origem }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Voltar", "Index", "RegistrarAutor", new { origem = ViewBag.Origem }, null)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert alert-warning" role="alert">@ViewBag.Mensagem</div>
+    }
+
+    @if (ViewBag.Problemas != null)
+    {
+        foreach (var problema in ViewBag.Problemas)
+        {
+            <div class="alert alert-danger" role="alert">@problema</div>
+        }
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="AutorId" value="@Model.AutorId" />
+        <input type="hidden" name="oigem" value="@ViewBag.Origem" />
+
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="txtNome">Nome</label>
+                            <input type="text" class="form-control" name="Nome" id="txtNome" placeholder="" value="@Model.Nome" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="txtSobrenome">Sobrenome</label>
+                            <input type="text" class="form-control" name="Sobrenome" id="txtSobrenome" placeholder="" value="@Model.Sobrenome">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="txtEmail">E-mail</label>
+                            <input type="email" class="form-control" name="Email" id="txtEmail" placeholder="" value="@Model.Email">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    }
+</div>

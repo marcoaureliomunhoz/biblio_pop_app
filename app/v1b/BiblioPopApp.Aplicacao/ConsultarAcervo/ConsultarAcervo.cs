@@ -39,7 +39,8 @@ namespace BiblioPopApp.Aplicacao.ConsultarAcervo
                 foreach (var livro in aoListarAcervo.Valor)
                 {
                     var livroDto = LivroAcervoDTO.Fabricar(livro);
-                    livroDto.Autoria = String.Join(", ", livroDto.Autores.Select(x => x.Nome + " " + x.Sobrenome).ToArray());
+                    if (livroDto.Autores != null && livroDto.Autores.Count > 0)
+                        livroDto.Autoria = String.Join(", ", livroDto.Autores.Select(x => x.Nome + " " + x.Sobrenome).ToArray());
                     livros.Add(livroDto);
                 }
 
@@ -65,7 +66,7 @@ namespace BiblioPopApp.Aplicacao.ConsultarAcervo
                 retorno.Valor = new List<EditoraDTO>();
                 foreach (var editora in aoListar.Valor)
                 {
-                    retorno.Valor.Add(EditoraDTO.Fabricar(editora));                    
+                    retorno.Valor.Add(EditoraDTO.Fabricar(editora));
                 }
             }
 

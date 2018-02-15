@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BiblioPopApp.Aplicacao._DTO.AutorDTO>
+
+@{
+    ViewBag.Title = "Registrar Autor";
+    string origem = string.IsNullOrEmpty(ViewBag.Origem) ? "Home" : ViewBag.Origem;
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @if (origem == "Home")
+            {
+                Html.ActionLink("Registrar Autor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+            else
+            {
+                <span class="navbar-brand">Registrar Autor</span>
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Novo", "Cadastro", new { id = 0, origem = origem })</li>
+                @if (origem == "Home") {
+                    <li>@Html.ActionLink("Voltar", "Index", "Home")</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert alert-warning" role="alert">@ViewBag.Mensagem</div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var autor in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink("Ajustar", "Cadastro", new { id = autor.AutorId, origem = origem })</td>
+                    <td>@autor.Nome</td>
+                    <td>@autor.Sobrenome</td>
+                    <td>@autor.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

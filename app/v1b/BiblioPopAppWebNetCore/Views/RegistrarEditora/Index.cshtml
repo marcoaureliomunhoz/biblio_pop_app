@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BiblioPopApp.Aplicacao._DTO.EditoraDTO>
+
+@{
+    ViewBag.Title = "Registrar Editora";
+    string origem = string.IsNullOrEmpty(ViewBag.Origem) ? "" : ViewBag.Origem;
+}
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @if (string.IsNullOrEmpty(origem))
+            {
+                Html.ActionLink("Registrar Editora", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+            else
+            {
+                <span class="navbar-brand">Registrar Editora</span>
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Nova", "Cadastro", new { id = 0, origem = origem })</li>
+                @if (string.IsNullOrEmpty(origem))
+                {
+                    <li>@Html.ActionLink("Voltar", "Index", "Home")</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="alert alert-warning" role="alert">@ViewBag.Mensagem</div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Site</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var autor in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink("Ajustar", "Cadastro", new { id = autor.EditoraId, origem = origem })</td>
+                    <td>@autor.Nome</td>
+                    <td>@autor.Site</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
