@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <span class="navbar-brand">Registrar Autor</span>
+      <button (click)="toggleCollapse()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" [class.show]="show==1" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" routerLink="/novo-autor">Novo</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/">Voltar</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<main class="container">
+
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Sobrenome</th>
+              <th scope="col">E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let autor of autores" routerLink="/ajustar-autor/{{autor.AutorId}}">
+              <td>{{ autor.Nome }}</td>
+              <td>{{ autor.Sobrenome }}</td>
+              <td>{{ autor.Email }}</td>
+            </tr>
+          </tbody>
+      </table>
+
+</main>

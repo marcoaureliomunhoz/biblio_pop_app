@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <span class="navbar-brand">Registrar Autor</span>
+      <button (click)="toggleCollapse()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" [class.show]="show==1" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" routerLink="/registrar-autor">Voltar</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <div class="alert alert-warning" role="alert" *ngIf="mensagem.length>0">
+      {{ mensagem }}
+    </div>
+
+    <div *ngIf="problemas.length>0">
+        <div class="alert alert-secondary" role="alert" *ngFor="let problema of problemas">
+            {{ problema }}
+        </div>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="txtNome">Nome</label>
+        <input type="text" class="form-control" id="txtNome" name="nome" [(ngModel)]="autor.Nome">
+      </div>
+      <div class="form-group">
+        <label for="txtSobrenome">Sobrenome</label>
+        <input type="text" class="form-control" id="txtSobrenome" name="sobrenome" [(ngModel)]="autor.Sobrenome">
+      </div>
+      <div class="form-group">
+          <label for="txtEmail">E-mail</label>
+          <input type="email" class="form-control" id="txtEmail" name="email" [(ngModel)]="autor.Email">
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+  </main>
