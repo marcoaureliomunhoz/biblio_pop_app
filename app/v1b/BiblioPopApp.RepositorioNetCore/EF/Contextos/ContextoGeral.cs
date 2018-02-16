@@ -15,10 +15,10 @@ namespace BiblioPopApp.RepositorioNetCore.EF.Contextos
             //Database.Log = msg => Console.WriteLine(msg);
         }
 
-        public virtual DbSet<TabAutor> Autores { get; set; }
-        public virtual DbSet<TabEditora> Editoras { get; set; }
-        public virtual DbSet<TabLivro> Livros { get; set; }
-        public virtual DbSet<TabLivroAutoria> LivroAutoria { get; set; }
+        public DbSet<TabAutor> Autores { get; set; }
+        public DbSet<TabEditora> Editoras { get; set; }
+        public DbSet<TabLivro> Livros { get; set; }
+        public DbSet<TabLivroAutoria> LivroAutoria { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

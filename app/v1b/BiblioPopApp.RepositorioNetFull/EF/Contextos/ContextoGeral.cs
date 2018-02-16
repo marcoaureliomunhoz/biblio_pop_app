@@ -18,9 +18,9 @@ namespace BiblioPopApp.RepositorioNetFull.EF.Contextos
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<TabAutor> Autores { get; set; }
-        public virtual DbSet<TabEditora> Editoras { get; set; }
-        public virtual DbSet<TabLivro> Livros { get; set; }
+        public DbSet<TabAutor> Autores { get; set; }
+        public DbSet<TabEditora> Editoras { get; set; }
+        public DbSet<TabLivro> Livros { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
