@@ -23,19 +23,26 @@ namespace BiblioPopApp.Aplicacao.RegistrarAutor
             if (autor.EstaEmEstadoIntegro())
             {
                 var retornoAoInserirEmRepositorioAutor = repAutor.Inserir(autor);
-                retorno.AutorId = retornoAoInserirEmRepositorioAutor.AutorId;
-                if (retornoAoInserirEmRepositorioAutor.Problemas.Count>0)
+                if (retornoAoInserirEmRepositorioAutor != null)
+                {
+                    retorno.AutorId = retornoAoInserirEmRepositorioAutor.AutorId;
+                    if (retornoAoInserirEmRepositorioAutor.Problemas.Count > 0)
+                    {
+                        retorno.Mensagem = "Não foi possível registrar o novo autor.";
+                        retorno.Problemas.AddRange(retornoAoInserirEmRepositorioAutor.Problemas);
+                    }
+                }
+                else
                 {
                     retorno.Mensagem = "Não foi possível registrar o novo autor.";
-                    retorno.Problemas.AddRange(retornoAoInserirEmRepositorioAutor.Problemas);
                 }
             }
             else
-            {                
+            {
                 retorno.Mensagem = "Os dados do novo autor não foram devidamente informados.";
                 retorno.Problemas.AddRange(autor.Problemas);
             }
-            
+
             return retorno;
         }
 

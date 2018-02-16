@@ -14,12 +14,12 @@ namespace BiblioPopApp.Aplicacao._DTO
             return Nome + (!string.IsNullOrEmpty(Sobrenome) ? " " + Sobrenome : "");
         }
 
-        internal Autor Fabricar()
+        public Autor Fabricar()
         {
             return new Autor(AutorId, Nome, Sobrenome, Email);
         }
 
-        internal static AutorDTO Fabricar(Autor autor)
+        public static AutorDTO Fabricar(Autor autor)
         {
             return new AutorDTO
             {

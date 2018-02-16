@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepositorioAutorList.cs" />
     <Compile Include="RepositorioEditora.cs" />
     <Compile Include="EF\Contextos\ContextoGeral.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
