@@ -39,9 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1 API", "1.1 API", "{FDC7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioPopAppApiNetFull", "BiblioPopAppApiNetFull\BiblioPopAppApiNetFull.csproj", "{B488DF4C-D878-4341-A31F-1F21E7C922F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioPopApp.Dominio.Teste", "BiblioPopApp.Dominio.Teste\BiblioPopApp.Dominio.Teste.csproj", "{DCC20A39-841E-4F38-ADEE-100E8062AC18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiblioPopApp.Dominio.Teste", "BiblioPopApp.Dominio.Teste\BiblioPopApp.Dominio.Teste.csproj", "{DCC20A39-841E-4F38-ADEE-100E8062AC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioPopApp.Aplicacao.Teste", "BiblioPopApp.Aplicacao.Teste\BiblioPopApp.Aplicacao.Teste.csproj", "{FE6CB378-A846-413D-BD41-259223A89DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiblioPopApp.Aplicacao.Teste", "BiblioPopApp.Aplicacao.Teste\BiblioPopApp.Aplicacao.Teste.csproj", "{FE6CB378-A846-413D-BD41-259223A89DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioPopAppApiNetCore", "BiblioPopAppApiNetCore\BiblioPopAppApiNetCore.csproj", "{5277F4C3-F4FB-4446-82FE-33F0370EA24D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -247,6 +249,22 @@ Global
 		{FE6CB378-A846-413D-BD41-259223A89DAF}.Release|x64.Build.0 = Release|Any CPU
 		{FE6CB378-A846-413D-BD41-259223A89DAF}.Release|x86.ActiveCfg = Release|Any CPU
 		{FE6CB378-A846-413D-BD41-259223A89DAF}.Release|x86.Build.0 = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|x64.Build.0 = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Debug|x86.Build.0 = Debug|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|ARM.Build.0 = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|x64.ActiveCfg = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|x64.Build.0 = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|x86.ActiveCfg = Release|Any CPU
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -266,6 +284,7 @@ Global
 		{B488DF4C-D878-4341-A31F-1F21E7C922F6} = {FDC7B9CB-4DC8-4B54-8CC3-5818D8B4DA88}
 		{DCC20A39-841E-4F38-ADEE-100E8062AC18} = {B3B7E664-8856-41EE-B41C-314B37ABF3D4}
 		{FE6CB378-A846-413D-BD41-259223A89DAF} = {7F724EF4-AB9B-409A-AD2E-D1A54E0F080E}
+		{5277F4C3-F4FB-4446-82FE-33F0370EA24D} = {FDC7B9CB-4DC8-4B54-8CC3-5818D8B4DA88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C2D811CD-2B14-423E-99A5-542AF1CFDE5C}

@@ -20,6 +20,7 @@ namespace BiblioPopApp.Aplicacao._DTO
 
         internal static EditoraDTO Fabricar(Editora editora)
         {
+            if (editora==null) return new EditoraDTO();
             return new EditoraDTO
             {
                 EditoraId = editora.EditoraId,

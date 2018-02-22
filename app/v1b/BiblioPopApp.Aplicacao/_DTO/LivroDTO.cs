@@ -27,6 +27,7 @@ namespace BiblioPopApp.Aplicacao._DTO
 
         internal static LivroDTO Fabricar(Livro livro)
         {
+            if (livro == null) return new LivroDTO();
             var autores = new List<AutorDTO>();
             foreach (var autor in livro.Autores)
             {

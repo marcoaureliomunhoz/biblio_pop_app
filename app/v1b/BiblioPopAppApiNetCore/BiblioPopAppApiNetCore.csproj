@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BiblioPopApp.Aplicacao\BiblioPopApp.Aplicacao.csproj" />
+    <ProjectReference Include="..\BiblioPopApp.Base\BiblioPopApp.Base.csproj" />
+    <ProjectReference Include="..\BiblioPopApp.Dominio\BiblioPopApp.Dominio.csproj" />
+    <ProjectReference Include="..\BiblioPopApp.RepositorioNetCore\BiblioPopApp.RepositorioNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

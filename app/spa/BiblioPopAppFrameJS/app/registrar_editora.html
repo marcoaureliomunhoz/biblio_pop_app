@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" js_ctx="registrarEditoraContext">
+<head>
+	<meta charset="utf-8">
+	<title>Registrar Editora</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">	
+    <link href="app.css" rel="stylesheet" type="text/css">	
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <span class="navbar-brand">Registrar Editora</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="cadastro_editora.html">Nova</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html">Voltar</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container">
+    
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Site</th>
+                    </tr>
+                </thead>
+                <tbody js_foreach="editora in editoras">                    
+                    <tr js_click="ajustar({{editora.EditoraId}})">
+                        <td js_prop_for="editora.Nome"></td>
+                        <td js_prop_for="editora.Site"></td>
+                    </tr>                    
+                </tbody>
+            </table>
+    
+    </main>
+            			  	
+	<!-- node_modules -->
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- frame.js -->
+	<script src="../lib/frame.js"></script>
+
+	<!-- app.js -->
+	<script src="app.js"></script>
+
+	<!-- init -->
+	<script>
+		$(document).ready(function(){
+			js_frame.init();			
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" js_ctx="registrarLivroContext">
+<head>
+	<meta charset="utf-8">
+	<title>Registrar Autor</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">	
+    <link href="app.css" rel="stylesheet" type="text/css">	
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <span class="navbar-brand">Registrar Livro</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html" js_attr="href=href">Voltar</a></li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="alert alert-warning" role="alert" js_prop_view="mensagem">            
+        </div>
+    
+        <div js_foreach="problema in problemas">
+            <div class="alert alert-secondary" role="alert" js_prop_for="problema">
+            </div>
+        </div>
+
+        <form>
+            <div class="row">
+            <div class="col-lg-9">
+                <div class="form-group">
+                <label for="txtTitulo">Título</label>
+                <input type="text" class="form-control" id="txtTitulo" name="titulo" 
+                    js_prop="livro.Titulo"
+                >
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                <label for="txtEstante">Estante</label>
+                <input type="text" class="form-control" id="txtEstante" name="estante" 
+                    js_prop="livro.Estante"
+                >
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9">
+                <div class="form-group">
+                    <label for="cmbEditora">Editora</label>
+                    <select class="form-control" id="cmbEditora" name="editora" 
+                        js_prop="livro.EditoraId"
+                        js_foreach="editora in editoras"
+                    >
+                        <option value="{{editora.EditoraId}}">{{editora.Nome}}</option>
+                    </select>
+                </div>
+                </div>
+                <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="txtAnoPublicacao">Ano Publicação</label>
+                    <input type="text" class="form-control" id="txtAnoPublicacao" name="anoPublicacao" 
+                        js_prop="livro.AnoPublicacao"
+                    >
+                </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Autores</label>
+                        <div class="form-control"
+                            js_foreach="autor in livro.Autores"
+                        >
+                            <div>
+                                {{autor.Nome}} {{autor.Sobrenome}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-11">
+                    <div class="form-group">
+                        <select class="form-control" id="cmbAutoresDisponiveis" name="autoresDisponiveis"
+                            js_prop="autorDisponivelId"
+                            js_foreach="autor in autoresDisponiveis"
+                        >
+                            <option value="{{autor.AutorId}}">{{autor.Nome}} {{autor.Sobrenome}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-danger" style="width: 100%" js_click="incluirAutor()">+</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <button type="button" class="btn btn-primary" js_click="salvar()">Salvar</button>
+    </main>            
+            			  	
+	<!-- node_modules -->
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- frame.js -->
+	<script src="../lib/frame.js"></script>
+
+	<!-- app.js -->
+	<script src="app.js"></script>
+
+	<!-- init -->
+	<script>
+		$(document).ready(function(){
+			js_frame.init();			
+		});
+	</script>
+</body>
+</html>

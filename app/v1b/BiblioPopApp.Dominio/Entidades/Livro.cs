@@ -51,7 +51,7 @@ namespace BiblioPopApp.Dominio.Entidades
             {
                 LivroId = id;
                 Titulo = titulo;
-                Estante = estante;
+                Estante = estante ?? "";
                 AnoPublicacao = anoPublicacao;
             }
         }

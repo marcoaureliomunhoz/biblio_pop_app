@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR" js_ctx="consultarAcervoContext">
+<head>
+	<meta charset="utf-8">
+	<title>Consultar Acervo</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">	
+    <link href="app.css" rel="stylesheet" type="text/css">	
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <span class="navbar-brand">Consultar Acervo</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="registrar_livro.html?origem=consultar_acervo">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html">Voltar</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container">
+    
+        <div class="alert alert-info" role="alert">
+            <div class="form-group">
+            <label for="txtTitulo">Título</label>
+            <input type="text" class="form-control" id="txtTitulo" name="titulo" 
+                js_prop="titulo""
+                js_keyup="listaAcervo()"
+            >
+            </div>
+            <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="cmbEditora">Editora</label>
+                    <select class="form-control" id="cmbEditora" name="editora" 
+                        js_prop="editoraId"
+                        js_select="listaAcervo()"
+                        js_foreach="editora in editoras" 
+                    >
+                        <option value="{{editora.EditoraId}}">{{editora.Nome}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="cmbAutor">Autor</label>
+                    <select class="form-control" id="cmbAutor" name="autor" 
+                        js_prop="autorId"
+                        js_select="listaAcervo()"
+                        js_foreach="autor in autores"
+                    >
+                        <option value="{{autor.AutorId}}">{{autor.Nome}} {{autor.Sobrenome}}</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Estante</th>
+                    <th scope="col">Ano Publicação</th>
+                    <th scope="col">Editora</th>
+                    <th scope="col">Autoria</th>
+                </tr>
+            </thead>
+            <tbody js_foreach="livro in acervo">
+                <tr js_click="ajustarLivro({{livro.LivroId}})">
+                    <td>{{livro.Titulo}}</td>
+                    <td>{{livro.Estante}}</td>
+                    <td>{{livro.AnoPublicacao}}</td>
+                    <td>{{livro.Editora.Nome}}</td>
+                    <td>{{livro.Autoria}}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </main>
+            			  	
+	<!-- node_modules -->
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- frame.js -->
+	<script src="../lib/frame.js"></script>
+
+	<!-- app.js -->
+	<script src="app.js"></script>
+
+	<!-- init -->
+	<script>
+		$(document).ready(function(){
+			js_frame.init();			
+		});
+	</script>
+</body>
+</html>

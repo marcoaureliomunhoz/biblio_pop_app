@@ -21,6 +21,7 @@ namespace BiblioPopApp.Aplicacao._DTO
 
         public static AutorDTO Fabricar(Autor autor)
         {
+            if (autor == null) return new AutorDTO();
             return new AutorDTO
             {
                 AutorId = autor.AutorId,
